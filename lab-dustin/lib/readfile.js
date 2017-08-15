@@ -13,4 +13,4 @@ exports.readData = function(file, callback) {
   });
 };
 
-//readData('yomamma.txt');
+exports.readData('knockknock.txt');
