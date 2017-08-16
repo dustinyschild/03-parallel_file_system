@@ -8,7 +8,7 @@ describe('Read File Module', function(){
       read.readData('yomamma.txt', function(err, data) {
         //tests with data from callback
         assert.ifError(err);
-        assert.strictEqual(data, '596f206d');
+        assert.strictEqual(data.hex, '596f206d');
 
         done();
       });
@@ -17,7 +17,7 @@ describe('Read File Module', function(){
       read.readData('knockknock.txt', function(err, data) {
         //tests with data from callback
         assert.ifError(err);
-        assert.strictEqual(data, '4b6e6f63');
+        assert.strictEqual(data.hex, '4b6e6f63');
 
         done();
       });
@@ -26,7 +26,17 @@ describe('Read File Module', function(){
       read.readData('chucknorris.txt', function(err, data) {
         //tests with data from callback
         assert.ifError(err);
-        assert.strictEqual(data, '43687563');
+        assert.strictEqual(data.hex, '43687563');
+
+        done();
+      });
+    });
+  });
+
+  describe('#readAll()', function(){
+    it('should return concatonated strings in order of: yomama, knockknock, and chucknorris', function(done){
+      read.readAll('yomama.txt','knockknock.txt','chucknorris.txt', function(err, data){
+        assert.strictEqual(data.concatStrings, '596f206d4b6e6f6343687563');
 
         done();
       });
