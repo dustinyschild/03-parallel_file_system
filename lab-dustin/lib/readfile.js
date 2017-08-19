@@ -40,4 +40,4 @@ exports.readAll = function(file1,file2,file3,callback){
 };
 
 //exports.readData('chucknorris.txt',(err,data) => console.log(data));
-exports.readAll('yomamma.txt','knockknock.txt','chucknorris.txt',(err,data) => console.log('concatStrings: ',data));
+//exports.readAll('mydaddy.txt','knockknock.txt','chucknorris.txt',(err,data) => console.log('concatStrings: ',data));

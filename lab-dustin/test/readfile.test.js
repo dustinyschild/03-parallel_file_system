@@ -41,5 +41,13 @@ describe('Read File Module', function(){
         done();
       });
     });
+    it('should handle if an invalid file is given', function(done){
+      read.readAll('yomama.txt','knockknock.txt','chucknorris.txt', function(err, data){
+        console.log(data);
+        console.log(err);
+        assert.ifError(err);
+        done();
+      });
+    });
   });
 });
