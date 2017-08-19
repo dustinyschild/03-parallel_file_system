@@ -3,29 +3,41 @@
 const { readFile } = require('fs');
 
 exports.readData = function(file, callback) {
-  readFile(`${__dirname}/../assets/${file}`, function(err, buff){
-    if (err) { callback(err); }
-    console.log(file);
-    console.log(buff.toString('hex').slice(0,8));
-    if(callback) { callback(null,
-      {
-        hex: buff.toString('hex').slice(0,8),
-        filepath: `${__dirname}/../assets/${file}`,
-        concatStrings: '596f206d4b6e6f6343687563'
-      });
+  var filePath = `${__dirname}/../assets/${file}`;
+  readFile(filePath, function(err, buff){
+    if (err) { return callback(err); }
+    //console.log(file);
+    //console.log(buff.toString('hex').slice(0,8));
+    var data = {
+      fileData: filePath,
+      hex: buff.slice(0,8).toString('hex'),
+      filepath: `${__dirname}/../assets/${file}`,
+    };
+    if(callback) {
+      callback(null,data);
     }
   });
 };
 
 exports.readAll = function(file1,file2,file3,callback){
+  var concatStrings = '';
   exports.readData(file1,(err,data) => {
-    console.log(data);
+    if (err) { return callback(err); }
+    concatStrings += data.hex;
+    console.log(data.hex);
     exports.readData(file2,(err,data) => {
-      console.log(data);
+      if (err) { return callback(err); }
+      concatStrings += data.hex;
+      console.log(data.hex);
       exports.readData(file3,(err,data) => {
-        console.log(data);
-        callback(null,data);
+        if (err) { return callback(err); }
+        concatStrings += data.hex;
+        console.log(data.hex);
+        callback(null,concatStrings);
       });
     });
   });
 };
+
+//exports.readData('chucknorris.txt',(err,data) => console.log(data));
+exports.readAll('yomamma.txt','knockknock.txt','chucknorris.txt',(err,data) => console.log('concatStrings: ',data));
