@@ -17,13 +17,15 @@ exports.readData = function(file, callback) {
   });
 };
 
-exports.readAll = function(data1,data2,data3,callback){
-  exports.readData(data1, () => {
-    exports.readData(data2, () => {
-      exports.readData(data3);
+exports.readAll = function(file1,file2,file3,callback){
+  exports.readData(file1,(err,data) => {
+    console.log(data);
+    exports.readData(file2,(err,data) => {
+      console.log(data);
+      exports.readData(file3,(err,data) => {
+        console.log(data);
+        callback(null,data);
+      });
     });
   });
-  if(callback) { callback(null, '?'); }
 };
-//hi keith
-exports.readAll('yomamma.txt','knockknock.txt','chucknorris.txt');
